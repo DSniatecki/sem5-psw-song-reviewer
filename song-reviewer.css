@@ -49,6 +49,14 @@ section:hover {
     box-shadow: 10px 6px 6px #373737;
 }
 
+.die {
+    text-align: center;
+    padding: 200px;
+    color: red;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
 textarea {
     background: rgba(238, 236, 236, 0.97);
     border: 1px solid #021f1f;
@@ -75,7 +83,7 @@ textarea:hover {
     border-radius: 4px;
     padding: 12px;
     color: white;
-    margin: 5px 30px;
+    margin: 20px 30px;
 }
 
 .closebtn {

@@ -1,6 +1,17 @@
 <?php
 include 'data.php';
 
+$songArtists = array();
+$i = 0;
+
+while ($i < count($artists)) {
+    $currentArtist = current($artists);
+    array_push($songArtists, $currentArtist);
+    next($artists);
+    $i = $i + 1;
+}
+reset($artists);
+
 function createSongReview(array $rawSongReview)
 {
     return array(
@@ -34,12 +45,15 @@ function createSongReview(array $rawSongReview)
 <header>Song Reviewer</header>
 <?php
 if (isset($_POST['submit'])) {
-    $name = $_POST["reviewerEmail"];
-    if (!preg_match(EMAIL_REGEXP, $name)) { ?>
+    if (strtolower($_POST["songName"]) == "die") {
+        die('<div class="die"><strong>I am dying...</strong></div>');
+    }
+    $reviewerEmail = $_POST["reviewerEmail"];
+    if (!preg_match(EMAIL_REGEXP, $reviewerEmail)) { ?>
         <div id="formAlert">
             <div class="alert" style="background-color: red;">
                 <span id="formAlertCloseBtn" class="closebtn">&times;</span>
-                <?php echo "Wrong email!" ?>
+                <?php echo "{$_SERVER['REMOTE_ADDR']} - Wrong email!"; ?>
             </div>
         </div>
         <?php
@@ -48,7 +62,7 @@ if (isset($_POST['submit'])) {
         <div id="formAlert">
             <div class="alert" style="background-color: #0e9b0e;">
                 <span id="formAlertCloseBtn" class="closebtn">&times;</span>
-                Review was added !
+                Review nr. <?php echo count($songReviews) + 1 ?> was added !
             </div>
         </div>
         <?php
@@ -62,9 +76,13 @@ if (isset($_POST['submit'])) {
         <p>
             <label>Artist:
                 <select name="artistName" autocomplete="on">
-                    <?php foreach ($artists as $artist) { ?>
+                    <?php
+                    for ($i = 0; $i < count($songArtists); $i++) {
+                        $artist = $songArtists[$i];
+                        $nr = $i + 1;
+                        ?>
                         <option value="<?php echo $artist ?>">
-                            <?php echo $artist ?>
+                            <?php echo "$nr.) $artist" ?>
                         </option>
                     <?php } ?>
                 </select>

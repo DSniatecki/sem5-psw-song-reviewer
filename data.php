@@ -9,7 +9,6 @@ $artists = array(
     "Eminem"
 );
 
-
 $songReviews = array(
     array(
         "song" => array(
@@ -45,4 +44,5 @@ $songReviews = array(
         "review" => "Wherever they turn, irony dissolves and Turner, acting out lyrics like “I lost my train of thought” or “she held me very tightly” with am - dram theatricality, can’t help but be a real rock star even as he plays with the role . In the end, every side to the band – funk troupe, garage punks, aloof posers, heartfelt songwriters – coheres on the closing R U Mine ?, a diamond anthem that tightens and collapses at all the right moments . Now armed with what is essentially a greatest - hits set, Arctic Monkeys have become a band who can do everything – it might be a construct, but it feels so real . "
     )
 );
+
 ?>
