@@ -9,6 +9,15 @@ $artists = array(
     "Eminem"
 );
 
+$song_types = array("Rock",
+"Pop",
+"Electronic",
+"Cacophony",
+"Rap",
+"Trap",
+"Other"
+    );
+
 $songReviews = array(
     array(
         "song" => array(
