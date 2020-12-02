@@ -30,26 +30,24 @@
 
       <p>
         <label>Artist:
-          <input name="artistName" type="text" minlength="2"
-          maxlength="50" placeholder="Input artist" required/>
+          <input name="artistName" type="text" placeholder="Input artist"/>
         </label>
       </p>
       <p>
           <label>Your review:<textarea name="review" rows="10" cols="30"
-            placeholder="It was splendid!!!" required></textarea>
+            placeholder="It was splendid!!!"></textarea>
           </label>
       </p>
 
       <p>
         <label>When did the concert take place?:
-          <input name="concertDate" type="date" required/>
+          <input name="concertDate" type="date"/>
         </label>
       </p>
 
       <p>
         <label>Your nickname:
-          <input name="reviewerNickname" type="text" minlength="2" maxlength="40"
-                          placeholder="Your nickname" required/>
+          <input name="reviewerNickname" type="text"  placeholder="Your nickname"/>
         </label>
       </p>
 
