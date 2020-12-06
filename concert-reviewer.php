@@ -47,7 +47,7 @@
 
       <p>
         <label>Your nickname:
-          <input name="reviewerNickname" type="text"  placeholder="Your nickname"/>
+          <input name="reviewerNickname" type="text"  placeholder="Your nickname" value="one"/>
         </label>
       </p>
 
