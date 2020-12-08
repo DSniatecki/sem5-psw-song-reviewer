@@ -25,6 +25,7 @@ $userId = $_SESSION["userId"];
         <button id="showCookiesButton">Show cookies</button>
         <button id="logOutButton">Log out</button>
         <button id="changeLayoutButton">Personalize layout</button>
+        <button id="concertReviewerButton">Go to Concert Reviewer</button>
     </h3>
 </section><?php
 if (isset($_POST['submit'])) { ?>

@@ -8,6 +8,9 @@ function loadWebsite() {
     document.getElementById("changeLayoutButton").addEventListener("click", (e) => {
         window.location = 'style-change.php';
     })
+    document.getElementById("concertReviewerButton").addEventListener("click", (e) => {
+        window.location = 'concert-reviewer.php';
+    })
     setTimeout(() => {
         document.getElementById("formAlert").innerHTML = ''
     }, 5000);
