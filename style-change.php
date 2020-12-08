@@ -28,6 +28,9 @@ include 'data.php';
         $style = $styles[$_POST["chosenStyle"]];
         print("<link rel=\"stylesheet\" type=\"text/css\" href=$style>");
       }
+      if (isset($_POST['goBack'])){
+        redirect($project_path . "song-reviewer-private.php");
+      }
       ?>
     </p>
     <form name ="changeStyleForm" method="post">
@@ -48,8 +51,13 @@ include 'data.php';
 
         </label>
       </p>
-      <input type="submit" name = "preview" value = "Show me how it looks!">
-      <input type="submit" name = "setSelected" value = "Set this style for me!">
+      <p>
+        <input type="submit" name = "preview" value = "Show me how it looks!">
+        <input type="submit" name = "setSelected" value = "Set this style for me!">
+      </p>
+      <p>
+        <input type="submit" name = "goBack" value = "Go back">
+      </p>
     </form>
   </section>
 </body>

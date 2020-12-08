@@ -11,7 +11,7 @@ body {
     background-size: cover;
     min-width: 250px;
     margin: 0;
-    font-family: "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Courier New", "Myriad Set Pro", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 
@@ -24,7 +24,7 @@ iframe {
 }
 
 section {
-    background: rgb(238, 236, 236);
+    background: rgb(166, 166, 166);
     opacity: 97%;
     box-shadow: 6px 3px 3px #646363;
     border-radius: 4px;
@@ -47,7 +47,7 @@ h3 {
 
 
 section:hover {
-    box-shadow: 10px 6px 6px #373737;
+    box-shadow: 10px 6px 6px #f2f2f2;
 }
 
 .die {
@@ -65,10 +65,15 @@ textarea {
 }
 
 button {
-    background: #19c3c3;
+    background: #666666;
     color: white;
     border: 2px solid #021f1f;
     border-radius: 4px;
+}
+
+button:hover {
+  color: #00b300;
+  box-shadow: 1px 2px 2px #99ff99;
 }
 
 
@@ -79,13 +84,12 @@ input, select {
 }
 
 input:hover {
-    border: 2px solid #119f9f;
-    border-radius: 4px;
+  color: #00b300;
+  box-shadow: 1px 2px 2px #99ff99;
 }
 
 textarea:hover {
-    border: 2px solid #06d9d9;
-    border-radius: 4px;
+    box-shadow: 1px 2px 2px #99ff99;
 }
 
 .alert {
