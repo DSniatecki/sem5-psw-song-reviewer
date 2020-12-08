@@ -19,4 +19,16 @@ function redirect($url)
     exit();
 }
 
+function setStyle()
+{
+  $styles = array(
+    "default" => "song-reviewer.css",
+    "dark" => "song-reviewer-dark.css",
+    "funky" => "song-reviewer-funky.css"
+  );
+
+  $style = isset($_COOKIE["userStyle"]) ? $styles[$_COOKIE["userStyle"]] : $styles["default"];
+  print("<link rel=\"stylesheet\" type=\"text/css\" href=$style>");
+}
+
 ?>

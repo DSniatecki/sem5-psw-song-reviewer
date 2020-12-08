@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['songReviews'] = array();
                 $_SESSION["login"] = $login;
                 $_SESSION["userId"] = $reviewer["id"];
-                Redirect("/untitled/sem5-psw-song-reviewer/song-reviewer-private.php?user=$login");
+                Redirect($project_path . "song-reviewer-private.php?user=$login");
             } else {
                 $errorMessage = "Wrong password!";
             }

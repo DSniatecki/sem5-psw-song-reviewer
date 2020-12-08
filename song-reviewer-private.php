@@ -13,7 +13,9 @@ $userId = $_SESSION["userId"];
     <title>Song reviewer</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="Log, Logging">
-    <link rel="stylesheet" type="text/css" href="song-reviewer.css">
+    <?php
+    setStyle();
+    ?>
     <script type="text/javascript" src="song-reviewer-alerts.js"></script>
 </head>
 <body onload="loadWebsite()">
@@ -22,6 +24,7 @@ $userId = $_SESSION["userId"];
     <h3>Welcome <?php echo $login ?> !
         <button id="showCookiesButton">Show cookies</button>
         <button id="logOutButton">Log out</button>
+        <button id="changeLayoutButton">Personalize layout</button>
     </h3>
 </section><?php
 if (isset($_POST['submit'])) { ?>

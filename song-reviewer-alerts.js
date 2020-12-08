@@ -5,6 +5,9 @@ function loadWebsite() {
     document.getElementById("showCookiesButton").addEventListener("click", (e) => {
         window.location = 'song-reviewer-private-cookies.php';
     })
+    document.getElementById("changeLayoutButton").addEventListener("click", (e) => {
+        window.location = 'style-change.php';
+    })
     setTimeout(() => {
         document.getElementById("formAlert").innerHTML = ''
     }, 5000);
@@ -12,4 +15,3 @@ function loadWebsite() {
         document.getElementById("formAlert").innerHTML = ''
     })
 }
-

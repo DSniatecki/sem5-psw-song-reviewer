@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="keywords" content="Concert, Reviews">
     <meta name="authors" content="Damian Śniatecki, Jan Wantuła">
-    <link rel="stylesheet" type="text/css" href="song-reviewer.css">
+    <?php
+    include 'helpers.php';
+    setStyle();
+    ?>
     <script type="text/javascript" src="song-reviewer-alerts.js"></script>
 </head>
 

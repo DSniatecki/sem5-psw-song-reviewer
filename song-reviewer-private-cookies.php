@@ -11,7 +11,9 @@ $login = $_SESSION["login"];
     <title>Song reviewer</title>
     <meta charset="UTF-8">
     <meta name="keywords" content="Log, Logging">
-    <link rel="stylesheet" type="text/css" href="song-reviewer.css">
+    <?php
+    setStyle();
+    ?>
     <script type="text/javascript" src="song-reviewer-alerts.js"></script>
 </head>
 <body onload="loadWebsite()">
