@@ -3,9 +3,13 @@ include 'data.php';
 include 'helpers.php';
 
 session_start();
+$dao = new DataAccessObject();
 
-$login = $_SESSION["login"];
-$userId = $_SESSION["userId"];
+$selectedArtist = $_SESSION["selectedArtist"];
+if (isset($_GET['artistName'])) {
+    $selectedArtist = $_GET['artistName'];
+}
+$reviewer = $_SESSION["reviewer"];
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -21,7 +25,7 @@ $userId = $_SESSION["userId"];
 <body onload="loadWebsite()">
 <header>Song Reviewer</header>
 <section>
-    <h3>Welcome <?php echo $login ?> !
+    <h3>Welcome <?php echo $reviewer['login'] ?> !
         <button id="showCookiesButton">Show cookies</button>
         <button id="logOutButton">Log out</button>
         <button id="changeLayoutButton">Personalize layout</button>
@@ -32,11 +36,11 @@ if (isset($_POST['submit'])) { ?>
     <div id="formAlert">
         <div class="alert" style="background-color: #0e9b0e;">
             <span id="formAlertCloseBtn" class="closebtn">&times;</span>
-            Review nr. <?php echo count($songReviews) + count($_SESSION['songReviews']) + 1 ?> was added !
+            New review was added !
         </div>
     </div>
     <?php
-    array_push($_SESSION['songReviews'], createSongReview($_POST, $userId));
+    $dao->addNewReview(createSongReview($_POST, $reviewer));
 }
 ?>
 <section>
@@ -77,13 +81,43 @@ if (isset($_POST['submit'])) { ?>
         </p>
     </form>
 </section>
-<?php foreach (array_merge($songReviews, $_SESSION['songReviews']) as $songReview) {
-    $reviewer = $reviewers[$songReview["reviewerId"]]
+<section>
+    <h3>Filters:</h3>
+    <form id="reviewsFilterForm" name="reviewsFilterForm" method="get" autocomplete="on">
+        <p>
+            <label>Artist:
+                <select name="artistName" autocomplete="on">
+                    <?php
+                    for ($i = 0; $i < count($artists); $i++) {
+                        $artist = $artists[$i];
+                        $isSelected = boolval($artist == $selectedArtist);
+                        $nr = $i + 1;
+                        ?>
+                        <option value="<?php echo $artist ?>"
+                            <?php if ($isSelected) {
+                                echo " selected";
+                            } ?>>
+                            <?php echo "$nr.) $artist" ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </label>
+        </p>
+        <p>
+            <input type="submit" name="refresh" value="Refresh"/>
+        </p>
+    </form>
+</section>
+<section><h3>Song reviews:</h3></section>
+<?php
+foreach ($dao->findAllReviews($selectedArtist) as $songReview) {
+    $song = $songReview['song'];
+    $reviewer = $songReview["reviewer"];
     ?>
     <section style="cursor: pointer;">
-        <h3><?php echo $songReview["song"]["name"] ?></h3>
-        <p><strong>Artist: </strong><?php echo $songReview["song"]["artist"] ?></p>
-        <p><strong>Album: </strong><?php echo $songReview["song"]["album"] ?></p>
+        <h3><?php echo $song["name"] ?></h3>
+        <p><strong>Artist: </strong><?php echo $song["artist"] ?></p>
+        <p><strong>Album: </strong><?php echo $song["album"] ?></p>
         <p><strong>Review: </strong><?php echo $songReview["review"] ?></p>
         <p><strong>Reviewer: </strong><?php
             echo $reviewer["isFemale"] ? "Ms. " : "Mr. ";

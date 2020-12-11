@@ -2,6 +2,11 @@
 include 'data.php';
 include 'helpers.php';
 
+$dao = new DataAccessObject();
+$selectedArtist = $artists[0];;
+if (isset($_GET['artistName'])) {
+    $selectedArtist = $_GET['artistName'];
+}
 if (session_status() == PHP_SESSION_ACTIVE) {
     session_destroy();
 }
@@ -18,20 +23,18 @@ if (session_status() == PHP_SESSION_ACTIVE) {
 <header>Song Reviewer</header>
 <?php
 if (isset($_POST['submit'])) {
+    $errorMessage = null;
     $login = $_POST["login"];
     $password = $_POST["password"];
-    $errorMessage = null;
-    foreach ($reviewers as $reviewer) {
-        if ($login == $reviewer["login"]) {
-            if ($password == $reviewer["password"]) {
-                session_start();
-                $_SESSION['songReviews'] = array();
-                $_SESSION["login"] = $login;
-                $_SESSION["userId"] = $reviewer["id"];
-                Redirect($project_path . "song-reviewer-private.php?user=$login");
-            } else {
-                $errorMessage = "Wrong password!";
-            }
+    $foundedReviewer = $dao->findReviewer($login);
+    if ($foundedReviewer != null) {
+        if ($password == $foundedReviewer['password']) {
+            session_start();
+            $_SESSION["reviewer"] = $foundedReviewer;
+            $_SESSION["selectedArtist"] = $selectedArtist;
+            Redirect($project_path . "song-reviewer-private.php?user=$login");
+        } else {
+            $errorMessage = "Wrong password!";
         }
     }
     if ($errorMessage == null) {
@@ -62,14 +65,45 @@ if (isset($_POST['submit'])) {
         </p>
     </form>
 </section>
+<section>
+    <h3>Filters:</h3>
+    <form id="reviewsFilterForm" name="reviewsFilterForm" method="get" autocomplete="on">
+        <p>
+            <label>Artist:
+                <select name="artistName" autocomplete="on">
+                    <?php
+                    for ($i = 0; $i < count($artists); $i++) {
+                        $artist = $artists[$i];
+                        $isSelected = boolval($artist == $selectedArtist);
+                        $nr = $i + 1;
+                        ?>
+                        <option value="<?php echo $artist ?>"
+                            <?php if ($isSelected) {
+                                echo " selected";
+                            } ?>>
+                            <?php echo "$nr.) $artist" ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </label>
+        </p>
+        <p>
+            <input type="submit" name="refresh" value="Refresh"/>
+        </p>
+    </form>
+</section>
 <section><h3>Song reviews:</h3></section>
-<?php foreach ($songReviews as $songReview) {
-    $reviewer = $reviewers[$songReview["reviewerId"]]
+
+<?php
+
+foreach ($dao->findAllReviews($selectedArtist) as $songReview) {
+    $song = $songReview['song'];
+    $reviewer = $songReview["reviewer"];
     ?>
     <section style="cursor: pointer;">
-        <h3><?php echo $songReview["song"]["name"] ?></h3>
-        <p><strong>Artist: </strong><?php echo $songReview["song"]["artist"] ?></p>
-        <p><strong>Album: </strong><?php echo $songReview["song"]["album"] ?></p>
+        <h3><?php echo $song["name"] ?></h3>
+        <p><strong>Artist: </strong><?php echo $song["artist"] ?></p>
+        <p><strong>Album: </strong><?php echo $song["album"] ?></p>
         <p><strong>Review: </strong><?php echo $songReview["review"] ?></p>
         <p><strong>Reviewer: </strong><?php
             echo $reviewer["isFemale"] ? "Ms. " : "Mr. ";
