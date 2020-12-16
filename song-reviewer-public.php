@@ -62,8 +62,22 @@ if (isset($_POST['submit'])) {
         <p>
             <input type="submit" name="submit" value="Sign in"/>
             <input type="reset" value="Clear"/>
+
+            <!--
+            </form>
+            <form action="register.php">
+            <input type="submit"  value="Register"/>
+            </form> -->
+            <button id="registerButton">Register</button>
+            <script>
+              var btn = document.getElementById('registerButton');
+              btn.addEventListener('click', function() {
+                window.location = 'register.php';
+              });
+            </script>
+          </form> <!-- delete up to this line if you want to use commented method of redirecting to 'register.php'-->
         </p>
-    </form>
+
 </section>
 <section>
     <h3>Filters:</h3>

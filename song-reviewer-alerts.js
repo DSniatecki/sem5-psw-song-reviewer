@@ -11,10 +11,15 @@ function loadWebsite() {
     document.getElementById("concertReviewerButton").addEventListener("click", (e) => {
         window.location = 'concert-reviewer.php';
     })
+    document.getElementById("editDataButton").addEventListener("click", (e) => {
+        window.location = 'register.php';
+    })
     setTimeout(() => {
         document.getElementById("formAlert").innerHTML = ''
     }, 5000);
     document.getElementById("formAlertCloseBtn").addEventListener("click", (e) => {
         document.getElementById("formAlert").innerHTML = ''
     })
+
+
 }

@@ -30,6 +30,8 @@ $reviewer = $_SESSION["reviewer"];
         <button id="logOutButton">Log out</button>
         <button id="changeLayoutButton">Personalize layout</button>
         <button id="concertReviewerButton">Go to Concert Reviewer</button>
+        <button id="editDataButton">Edit account</button>
+
     </h3>
 </section><?php
 if (isset($_POST['submit'])) { ?>

@@ -37,6 +37,15 @@ $login = $_SESSION["login"];
         <p><strong><?php echo $name ?>: </strong><?php echo $valueToDisplay ?></p>
     <?php } ?>
 </section>
+<section>
+  <h3>Database variables:</h3>
+  <p>
+    <?php
+      $dao = new DataAccessObject;
+
+    ?>
+  </p>
+</section>
 <footer>
     Song Reviewer 2020 &trade;
 </footer>

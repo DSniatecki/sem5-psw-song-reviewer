@@ -32,6 +32,12 @@ section {
     border: 2px solid rgb(45, 44, 44);
 }
 
+.error {
+  margin: 20px 30px;
+  color: red;
+  font-weight: bolder;
+  font-style: italic;
+}
 
 footer {
     text-align: center;

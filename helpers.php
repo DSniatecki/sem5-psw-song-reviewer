@@ -75,6 +75,31 @@ class DataAccessObject
 
     }
 
+    function addNewUser($newUser)
+    {
+      $dbConnection = pg_connect($this->connectionString);
+      $rawUser = "('${newUser['login']}', '${newUser['email']}', '${newUser['password']}', '${newUser['is_female']}')";
+      $query = "INSERT INTO reviewers(login, email, password, is_female) VALUES $rawUser;";
+      $result = pg_query($dbConnection, $query);
+      pg_close($dbConnection);
+      $error = pg_result_error($result);
+      if ($error) {
+          die("Connection with DB failed:  $error");
+      }
+    }
+
+    function updateUser($currentUser, $newData){
+      $dbConnection = pg_connect($this->connectionString);
+
+      $result = pg_update($dbConnection, 'reviewers',$newData, array('login' => "${currentUser['login']}"));
+
+      pg_close($dbConnection);
+      $error = pg_result_error($result);
+      if ($error) {
+          die("Connection with DB failed:  $error");
+      }
+    }
+
 }
 
 function createSongReview(array $rawSongReview, $reviewer)
@@ -106,6 +131,10 @@ function setStyle()
 
     $style = isset($_COOKIE["userStyle"]) ? $styles[$_COOKIE["userStyle"]] : $styles["default"];
     print("<link rel=\"stylesheet\" type=\"text/css\" href=$style>");
+}
+
+function printErrorMessage($msg){
+  print("<p class=\"error\">$msg</p>");
 }
 
 ?>

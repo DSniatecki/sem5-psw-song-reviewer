@@ -3,6 +3,7 @@
 define("FORM_TITLE", "Add new song!");
 define("EMAIL_REGEXP", "/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/");
 define("WEEK", 60 * 60 * 24 * 7);
+define("FORBIDDEN_USER_CHARS_REGEXP", "/[\^<,\"@\/\{\}\(\)\*\$%\?=>:\|;#]+/i");
 
 
 //Change path to your owns, so the sites work properly
