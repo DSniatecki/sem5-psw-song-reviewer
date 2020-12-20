@@ -38,11 +38,33 @@ $login = $_SESSION["login"];
     <?php } ?>
 </section>
 <section>
-  <h3>Database variables:</h3>
+  <form action="POST" id="usersFilters">
+  <h3>Available filters:</h3>
+  <p>
+
+  </p>
+  <p>
+    <input type="radio" name="is_female" value="true" checked>
+    Female
+    <input type="radio" name="is_female" value="false">Male
+  </p>
+  <input type="submit" name="useFilters" value="Apply filters">
+  <br>
+  </form>
+  <h3>Found users:</h3>
   <p>
     <?php
+
       $dao = new DataAccessObject;
 
+      $users = (isset($_POST["useFilters"]))? $dao->findMatchingUsers($filters) : $dao->findAllUsers();
+      foreach($dao->findMatchingUsers("") as $user){
+        print("<section>");
+        foreach($user as $col => $val){
+          print("<p>$col : $val </p>");
+        }
+        print("</section>");
+      }
     ?>
   </p>
 </section>

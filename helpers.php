@@ -100,6 +100,52 @@ class DataAccessObject
       }
     }
 
+    function findAllUsers()
+    {
+      $dbConnection = pg_connect($this->connectionString);
+      $usersQueryResult = pg_query($dbConnection, "SELECT * FROM reviewers;");
+      $error = pg_result_error($usersQueryResult);
+      if ($error) {
+          die("Connection with DB failed:  $error");
+      }
+      $users = array();
+      while ($usersRow = pg_fetch_assoc($usersQueryResult)) {
+          $user = array(
+              "login" => $usersRow["login"],
+              "id" => $usersRow["id"],
+              "password" => $usersRow["password"],
+              "email" => $usersRow["email"],
+              "is_female" => $usersRow["is_female"]
+          );
+          array_push($users, $user);
+      }
+      pg_close($dbConnection);
+      return $users;
+    }
+
+    function findMatchingUsers($condition)
+    {
+      $dbConnection = pg_connect($this->connectionString);
+      $usersQueryResult = pg_query($dbConnection, "SELECT * FROM reviewers WHERE $condition;");
+      $error = pg_result_error($usersQueryResult);
+      if ($error) {
+          die("Connection with DB failed:  $error");
+      }
+      $users = array();
+      while ($usersRow = pg_fetch_assoc($usersQueryResult)) {
+          $user = array(
+              "login" => $usersRow["login"],
+              "id" => $usersRow["id"],
+              "password" => $usersRow["password"],
+              "email" => $usersRow["email"],
+              "is_female" => $usersRow["is_female"]
+          );
+          array_push($users, $user);
+      }
+      pg_close($dbConnection);
+      return $users;
+    }
+
 }
 
 function createSongReview(array $rawSongReview, $reviewer)

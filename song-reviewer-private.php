@@ -25,14 +25,15 @@ $reviewer = $_SESSION["reviewer"];
 <body onload="loadWebsite()">
 <header>Song Reviewer</header>
 <section>
-    <h3>Welcome <?php echo $reviewer['login'] ?> !
+    <h3>Welcome <?php echo $reviewer['login'] ?> !</h3>
+    <span>
         <button id="showCookiesButton">Show cookies</button>
         <button id="logOutButton">Log out</button>
         <button id="changeLayoutButton">Personalize layout</button>
         <button id="concertReviewerButton">Go to Concert Reviewer</button>
         <button id="editDataButton">Edit account</button>
+    <span>
 
-    </h3>
 </section><?php
 if (isset($_POST['submit'])) { ?>
     <div id="formAlert">
