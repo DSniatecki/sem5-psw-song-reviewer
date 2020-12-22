@@ -141,7 +141,11 @@ if (isset($_POST['submit'])) {
           }
           ?>
           <label>Login <input name="login" type="text" <?php echo $editingMode ? "": "minlength=\"2\"" ; ?> maxlength="40" placeholder="login"
-            <?php echo $editingMode ? "": "required" ; ?> /></label>
+            <?php echo $editingMode ? "": "required" ; ?>
+            <?php
+            if (isset($_POST["login"])){
+              echo $registerErrors["loginerror"] ? '': "value=\"${_POST['login']}\"" ;
+            }?> /></label>
         </p>
         <p>
           <?php
@@ -150,7 +154,11 @@ if (isset($_POST['submit'])) {
           }
           ?>
           <label>Email <input name="email" type="text" <?php echo $editingMode ? "": "minlength=\"2\"" ; ?> maxlength="40" placeholder="email"
-            <?php echo $editingMode ? "": "required" ; ?>/></label>
+            <?php echo $editingMode ? "": "required" ; ?>
+            <?php
+            if (isset($_POST["email"])){
+              echo $registerErrors["emailerror"] ? '': "value=\"${_POST['email']}\"" ;
+            }?>/></label>
         </p>
         <p>
           <?php
@@ -158,7 +166,11 @@ if (isset($_POST['submit'])) {
             printErrorMessage($passwordErrorMsg);
           }
           ?>
-            <label>Password <input name="password" type="password" <?php echo $editingMode ? "": "minlength=\"6\"" ; ?> maxlength="80" placeholder="password"></label>
+            <label>Password <input name="password" type="password" <?php echo $editingMode ? "": "minlength=\"6\"" ; ?> maxlength="80" placeholder="password"
+              <?php
+              if (isset($_POST["password"])){
+                 echo $registerErrors["passworderror"] ? '': "value=\"${_POST['password']}\"" ;
+               }?>></label>
         </p>
 
           <label>I'm: Male

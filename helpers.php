@@ -131,6 +131,9 @@ class DataAccessObject
       if ($error) {
           die("Connection with DB failed:  $error");
       }
+      if (!$usersQueryResult){
+        return NULL;
+      }
       $users = array();
       while ($usersRow = pg_fetch_assoc($usersQueryResult)) {
           $user = array(

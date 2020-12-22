@@ -1,9 +1,10 @@
 <?php
+session_start();
 include 'data.php';
 include 'helpers.php';
 
-session_start();
-$login = $_SESSION["login"];
+$reviewer = $_SESSION["reviewer"];
+$login = $reviewer["login"];
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -38,13 +39,14 @@ $login = $_SESSION["login"];
     <?php } ?>
 </section>
 <section>
-  <form action="POST" id="usersFilters">
+  <h2>Users from database</h2>
+  <form name="filtersForm" method="post" id="usersFilters">
   <h3>Available filters:</h3>
   <p>
-
+    <label>Login <input name="login" type="text" minlength="2" maxlength="40" placeholder="login"/></label>
   </p>
   <p>
-    <input type="radio" name="is_female" value="true" checked>
+    <input type="radio" name="is_female" value="true">
     Female
     <input type="radio" name="is_female" value="false">Male
   </p>
@@ -57,13 +59,34 @@ $login = $_SESSION["login"];
 
       $dao = new DataAccessObject;
 
+      if (isset($_POST["is_female"]) and isset($_POST["login"]) and strlen($_POST["login"]) > 0){
+        $filters = "is_female = ${_POST['is_female']} AND login = '${_POST['login']}'";
+      }
+
+      else if (isset($_POST["is_female"])){
+        $filters = "is_female = ${_POST['is_female']}";
+      }
+
+      else if (isset($_POST["login"]) and strlen($_POST["login"]) > 0){
+        $filters = "login = '${_POST['login']}'";
+      }
+
+      else {
+        $_POST["useFilters"] = NULL;
+      }
+
       $users = (isset($_POST["useFilters"]))? $dao->findMatchingUsers($filters) : $dao->findAllUsers();
-      foreach($dao->findMatchingUsers("") as $user){
-        print("<section>");
-        foreach($user as $col => $val){
-          print("<p>$col : $val </p>");
+      if ($users != NULL){
+        foreach($users as $user){
+          print("<section>");
+          foreach($user as $col => $val){
+            print("<p>$col: $val </p>");
+          }
+          print("</section>");
         }
-        print("</section>");
+      }
+      else{
+        print("<h4>No users found!</h4>");
       }
     ?>
   </p>
