@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:prime="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <title>Song reviewer</title>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" content="Log, Logging"/>
+    <h:outputStylesheet library="css" name="song-reviewer.css"/>
+    <style>
+        .info {
+            color: #0e9b0e;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</h:head>
+<h:body>
+    <header>Song Reviewer</header>
+    <section>
+        <h3>Add new review</h3>
+        <h:form>
+            <h:messages infoClass="info" errorClass="error"/>
+            <h:panelGrid columns="3">
+                <p>
+                    <h:outputLabel for="song">Song:</h:outputLabel>
+                    <h:inputText value="#{newReview.song}" id="song"
+                                 required="true"
+                                 requiredMessage="Song is requiered."
+                                 validatorMessage="Song is required and cannot be shorter than 1 characters or longer than 80.">
+                        <f:validateLength minimum="1" maximum="80"/>
+                    </h:inputText>
+                </p>
+                <p>
+                    <h:outputLabel for="album">Album:</h:outputLabel>
+                    <h:inputText value="#{newReview.album}" id="album" required="true"
+                                 requiredMessage="Album is requiered."
+                                 validatorMessage="Album is required and cannot contain special characters.">
+                        <f:validateRegex pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9])*$"/>
+                    </h:inputText>
+                </p>
+                <p>
+                    <h:outputLabel for="artist">Artist:</h:outputLabel>
+                    <h:selectOneMenu id="artist" value="#{newReview.artist}">
+                        <f:selectItems value="#{reviewsBean.artists}"/>
+                    </h:selectOneMenu>
+                </p>
+                <p>
+                    <h:outputLabel for="score">Score:</h:outputLabel>
+                    <h:inputText value="#{newReview.score}" id="score"
+                                 required="true"
+                                 requiredMessage="Score is requiered."
+                                 converterMessage="Score must be a number."
+                                 validatorMessage="Score cannot be smaller than 0 or greater than 10">
+                        <f:validateLongRange minimum="0" maximum="10"/>
+                    </h:inputText>
+                </p>
+                <p>
+                    <h:outputLabel for="recommnedationType">Would you recommend it:</h:outputLabel>
+                    <h:selectOneRadio id="recommnedationType" value="#{newReview.recommendationType}" required="true"
+                                      requiredMessage="Recommendation is requiered.">
+                        <f:selectItem itemValue="Yes" itemLabel="Yes"/>
+                        <f:selectItem itemValue="I do not know" itemLabel="I do not know"/>
+                        <f:selectItem itemValue="Not really" itemLabel="Not really"/>
+                        <f:selectItem itemValue="No" itemLabel="No"/>
+                    </h:selectOneRadio>
+                </p>
+                <p>
+                    <h:outputLabel for="review">Review:</h:outputLabel>
+                    <h:inputText value="#{newReview.review}" id="review"
+                                 required="true"
+                                 requiredMessage="Review is requiered."
+                                 validatorMessage="Review cannot be shorter than 10 characters or longer than 2000.">
+                        <f:validateLength minimum="10" maximum="2000"/>
+                        <f:validator validatorId="noHtmlValidator"/>
+                    </h:inputText>
+                </p>
+                <p>
+                    <h:commandButton action="#{newReview.addBean()}" value="Submit"></h:commandButton>
+                </p>
+            </h:panelGrid>
+        </h:form>
+    </section>
+    <section><h3>Song reviews:</h3></section>
+    <ui:repeat value="#{reviewsBean.reviews}" var="review">
+        <section style="cursor: pointer;">
+            <h3><h:outputText value="#{review.song}"/></h3>
+            <p><strong>Artist: </strong><h:outputText value="#{review.artist}"/></p>
+            <p><strong>Album: </strong><h:outputText value="#{review.album}"/></p>
+            <p><strong>Score: </strong><h:outputText value="#{review.score}"/>/10</p>
+            <p><strong>Would you recommend it: </strong><h:outputText value="#{review.recommendationType}"/></p>
+            <p><strong>Review: </strong><h:outputText value="#{review.review}"/></p>
+            <p><strong>Reviewer: </strong><h:outputText value="#{review.reviewer.login}"/></p>
+            <p><strong>Reviewer email: </strong><h:outputText value="#{review.reviewer.email}"/></p>
+        </section>
+    </ui:repeat>
+    <footer>
+        Song Reviewer 2020
+    </footer>
+</h:body>
+</html>

@@ -1,0 +1,120 @@
+header {
+    background: rgba(19, 18, 18, 0.95);
+    color: #F5F5F7;
+    height: 30px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+body {
+    background: url("https://img.pngio.com/music-notes-background-melody-symbol-black-and-wite-llustration-music-notes-background-1024_591.jpg");
+    min-width: 250px;
+    margin: 0;
+    font-family: "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+
+iframe {
+    opacity: 100%;
+}
+
+#websiteSettingsSection {
+    cursor: pointer;
+}
+
+section {
+    background: rgb(238, 236, 236);
+    opacity: 97%;
+    box-shadow: 6px 3px 3px #646363;
+    border-radius: 4px;
+    margin: 25px 30px;
+    padding: 4px 20px;
+    border: 2px solid rgb(45, 44, 44);
+}
+
+.error {
+    margin: 20px 30px;
+    color: red;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+footer {
+    text-align: center;
+    background: rgba(19, 18, 18, 0.92);
+    color: #F5F5F7;
+    padding: 6px;
+}
+
+h3 {
+    margin: 5px;
+}
+
+
+section:hover {
+    box-shadow: 10px 6px 6px #373737;
+}
+
+.die {
+    text-align: center;
+    padding: 200px;
+    color: red;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+textarea {
+    background: rgba(238, 236, 236, 0.97);
+    border: 1px solid #021f1f;
+    border-radius: 4px;
+}
+
+button {
+    background: #19c3c3;
+    color: white;
+    border: 2px solid #021f1f;
+    border-radius: 4px;
+}
+
+button:hover {
+    color: #0066ff;
+}
+
+
+input, select {
+    background: rgba(238, 236, 236, 0.97);
+    border: 2px solid #021f1f;
+    border-radius: 4px;
+}
+
+input:hover {
+    border: 2px solid #119f9f;
+    border-radius: 4px;
+}
+
+textarea:hover {
+    border: 2px solid #06d9d9;
+    border-radius: 4px;
+}
+
+.alert {
+    border-radius: 4px;
+    padding: 12px;
+    color: white;
+    margin: 20px 30px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}

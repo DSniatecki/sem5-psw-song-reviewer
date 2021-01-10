@@ -1,6 +1,6 @@
 function loadWebsite() {
     document.getElementById("logOutButton").addEventListener("click", (e) => {
-        window.location = 'song-reviewer-public.php';
+        window.location = 'song-reviewer.xhtml';
     })
     document.getElementById("showCookiesButton").addEventListener("click", (e) => {
         window.location = 'song-reviewer-private-cookies.php';
